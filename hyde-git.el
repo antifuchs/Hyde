@@ -28,7 +28,7 @@
 (defun hyde/git/unpushedp (repo file)
   "Returns true if there are unpushed changes for the current file"
   (let (
-	(cmd (format "cd '%s' && git log --exit-code origin/master..HEAD '%s' > /dev/null" repo file))
+	(cmd (format "cd '%s' && git log --exit-code origin/boinkor.net..HEAD '%s' > /dev/null" repo file))
 	)
     (= (shell-command cmd) 1)))
 
