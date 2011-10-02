@@ -202,9 +202,12 @@ E Local unsaved changes"
 properly and returns them so that they can be presented to the
 user"
   (let (
-	(posts (split-string (strip-string (shell-command-to-string
-					    (concat "cd " hyde-home "/" dir " ; " hyde/hyde-list-posts-command ))))))
-    (map 'list (lambda (f) (format "%s : %s" (hyde/file-status dir f) f)) posts)))
+	(posts (sort (split-string (strip-string (shell-command-to-string
+					    (concat "cd " hyde-home "/" dir " ; " hyde/hyde-list-posts-command ))))
+                     (lambda (s1 s2)
+                       (string-lessp s2 s1)))))
+    (map 'list (lambda (f) (format "%s : %s" (hyde/file-status dir f) f))
+         posts)))
 
 (defun hyde/promote-to-post (pos)
   (interactive "d")
